@@ -69,6 +69,14 @@ lr: 3.0e-05
 num_epochs: 5
 ```
 
+Note that the different run-scripts correspond to different evaluation scenarios:
+|script name|scenario|
+|-:|-:|
+|`main.py`|fully supervised|
+|`main_fs.py`|few-shot|
+|`main_iczs`|in-context zero-shot|
+|`main_zslt`|zero-shot lingual transfer|
+
 
 ## 🔎&nbsp; Prompt Construction
 <img src="./docs/prompt.png" alt="drawing" width="800"/>
@@ -86,7 +94,9 @@ where $x$, $e_h$, $e_t$, $r$ are variants, and `<extra_id_?>` are special tokens
 
 
 ## 📝&nbsp; Dataset
-We evaluate the [SMiLER](https://aclanthology.org/2021.eacl-main.166/) dataset which covers 14 languages. The dataset can be downloaded from [https://github.com/samsungnlp/smiler](https://github.com/samsungnlp/smiler). The pre-processing script is at `./data/smiler/reformatter.py`.
+We evaluate the [SMiLER](https://aclanthology.org/2021.eacl-main.166/) dataset which covers 14 languages.
+
+The dataset can be downloaded from [https://github.com/samsungnlp/smiler](https://github.com/samsungnlp/smiler). The pre-processing script is at `./data/smiler/reformatter.py`.
 
 
 ## 📚&nbsp; Citation
