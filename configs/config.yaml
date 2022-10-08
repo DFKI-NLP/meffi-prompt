@@ -1,0 +1,15 @@
+seed: 1234
+cuda_device: 0
+
+train_file: "./data/smiler/de_corpora_train.json"
+eval_file: "./data/smiler/de_corpora_test.json"
+
+model: google/mt5-base
+
+soft_token_length: 0
+translate: False
+
+max_length: 256
+batch_size: 16
+lr: 3.e-5
+num_epochs: 5
