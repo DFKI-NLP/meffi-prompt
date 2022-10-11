@@ -1,6 +1,10 @@
 # MEffi-Prompt
 The repository for our paper ***Multilingual Relation Classification via Efficient and Effective Prompting***, to appear at **EMNLP-2022** (main conference).
 
+In this paper, we extend the power of prompting to the underexplored task of multilingual relation classification and aim to find out best ways to prompt for different languages, data regimes, etc. with minimal handcraft (i.e. translation). We are especially interested in its in-language and cross-lingual performance, as well as different behaviour between code-switch and in-language prompts.
+
+Effectiveness is validated over 14 languaged covered by the [SMiLER](https://aclanthology.org/2021.eacl-main.166/) dataset.
+
 <img src="./docs/overview.png" alt="drawing" width="800"/>
 
 
@@ -74,8 +78,8 @@ Note that the different run-scripts correspond to different evaluation scenarios
 |-:|-:|
 |`main.py`|fully supervised|
 |`main_fs.py`|few-shot|
-|`main_iczs`|in-context zero-shot|
-|`main_zslt`|zero-shot lingual transfer|
+|`main_iczs.py`|in-context zero-shot|
+|`main_zslt.py`|zero-shot lingual transfer|
 
 
 ## 🔎&nbsp; Prompt Construction
@@ -90,13 +94,30 @@ template = {
     "target": ["<extra_id_0>", "r", "<extra_id_1>"],
 }
 ```
-where $x$, $e_h$, $e_t$, $r$ are variants, and `<extra_id_?>` are special tokens preserved by T5 to denote either (1)start of a blank or (2) end of decoded sequence. The rest elements are hard tokens. To insert soft tokens, use `[vN]` (`v` means virtual token; `N` is the length of inserted soft tokens and can be specified in config.)
+where $x$, $e_h$, $e_t$, $r$ are variants, and `<extra_id_?>` are special tokens preserved by T5 to denote either (1) start of a blank or (2) end of decoded sequence. The rest elements are hard tokens. To insert soft tokens, use `[vN]` (`v` means virtual token; `N` is the length of inserted soft tokens and can be specified in config.)
 
 
 ## 📝&nbsp; Dataset
 We evaluate the [SMiLER](https://aclanthology.org/2021.eacl-main.166/) dataset which covers 14 languages.
 
-The dataset can be downloaded from [https://github.com/samsungnlp/smiler](https://github.com/samsungnlp/smiler). The pre-processing script is at `./data/smiler/reformatter.py`.
+The dataset can be downloaded from [https://github.com/samsungnlp/smiler](https://github.com/samsungnlp/smiler). The pre-processing script is at `./data/smiler/reformatter.py`. Main statistics per language are listed as follows:
+
+|Language|#Class|#Train|#Test|% no-rel (train)|
+|:-:|-:|-:|-:|-:|
+|**ar**|9|9303|190|3.46|
+|**de**|22|51490|1051|0.89|
+|**en**|36|267579|5461|4.91|
+|**es**|21|11061|226|4.83|
+|**fa**|8|2624|54|7.93|
+|**fr**|22|60884|1243|0.90|
+|**it**|22|73974|1510|0.70|
+|**ko**|28|18711|382|1.67|
+|**nl**|22|38850|793|0.86|
+|**pl**|21|16831|344|0.00|
+|**pt**|22|43335|885|0.84|
+|**ru**|8|6395|131|1.86|
+|**sv**|22|4482|92|0.60|
+|**uk**|7|968|20|7.02|
 
 
 ## 📚&nbsp; Citation
@@ -107,7 +128,7 @@ The dataset can be downloaded from [https://github.com/samsungnlp/smiler](https:
     booktitle = "Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing",
     month = december,
     year = "2022",
-    address = "Online and Abu Dhabi, UAE",
+    address = "Online and Abu Dhabi, the United Arab Emirates",
     publisher = "Association for Computational Linguistics",
     abstract = "Prompting pre-trained language models has achieved impressive performance on various NLP tasks, especially in low data regimes. Despite the success of prompting in monolingual settings, applying prompt-based methods in multilingual scenarios has been limited to a narrow set of tasks, due to the high cost of handcrafting multilingual prompts. In this paper, we present the first work on prompt-based multilingual relation classification (RC), by introducing an efficient and effective method that constructs prompts from relation triples and involves only minimal translation for the class labels. We evaluate its performance in fully supervised, few-shot and zero-shot scenarios, and analyze its effectiveness across 14 languages, prompt variants, and English-task training in cross-lingual settings. We find that in both fully supervised and few-shot scenarios, our prompt method beats competitive baselines: fine-tuning XLM-R_EM and null prompts. It also outperforms the random baseline by a large margin in zero-shot experiments. Our method requires little in-language knowledge and can be used as a strong baseline for similar multilingual classification tasks.",
 }
